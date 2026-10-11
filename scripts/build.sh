@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-# Собирает все списки для конфига:
-#   lists/*.txt  -> lists/*.mrs   свои списки (*-ips.txt пакуются как ipcidr, остальные как domain)
-#   rules/*               внешние списки, скачанные из первоисточников
+# Собирает все списки для конфига в каталог out/ (публикуется в ветку release):
+#   lists/*.txt  -> out/lists/*.mrs   свои списки (*-ips.txt пакуются как ipcidr, остальные как domain)
+#   out/rules/*                       внешние списки, скачанные из первоисточников
 # Если источник недоступен или отдал мусор, старый файл остаётся как был, а скрипт завершается с ошибкой.
 set -uo pipefail
 
 MIHOMO=${MIHOMO:-mihomo}
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
+OUT=${OUT:-$ROOT/out}
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
 failed=()
@@ -29,8 +30,8 @@ publish() {
   elif ! "$MIHOMO" convert-ruleset "$kind" text "$raw" "$out" || [ ! -s "$out" ]; then
     echo "FAIL $dest: mihomo не смог упаковать"; failed+=("$dest"); return
   fi
-  mkdir -p "$(dirname "$ROOT/$dest")"
-  mv "$out" "$ROOT/$dest"
+  mkdir -p "$(dirname "$OUT/$dest")"
+  mv "$out" "$OUT/$dest"
   echo "ok   $dest: $count"
 }
 
@@ -74,11 +75,10 @@ ru_apps() {
     jq -r '.rules[].rules[] | (.package_name // [])[]' | sed 's/^/PROCESS-NAME,/'
 }
 
-# Дополнительные подсети Telegram: официальный список, две AS и вручную добавленные подсети
+# Дополнительные подсети Telegram: официальный список, AS44893 и вручную добавленные подсети
 telegram_extra_ips() {
   {
     fetch https://core.telegram.org/resources/cidr.txt &&
-      fetch https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/asn/AS1273.list &&
       fetch https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/asn/AS44893.list &&
       printf '%s\n' 139.59.210.98/32 5.28.192.0/18 91.108.0.0/16 109.239.140.0/24 2001:b28:f23c::/47 2a0a:f280::/29
   } | grep -E '^[0-9A-Fa-f:.]+/[0-9]+$'
@@ -96,7 +96,7 @@ publish domain    rules/ru-inside.mrs          300   ru_inside
 publish domain    rules/torrent-trackers.mrs   100   torrent_trackers
 publish classical rules/torrent-clients.yaml   10    torrent_clients
 publish classical rules/ru-apps.yaml           100   ru_apps
-publish ipcidr    rules/telegram-extra-ips.mrs 100   telegram_extra_ips
+publish ipcidr    rules/telegram-extra-ips.mrs 15    telegram_extra_ips
 
 if [ ${#failed[@]} -gt 0 ]; then
   echo "не собрано: ${failed[*]}"

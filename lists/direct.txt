@@ -31,3 +31,6 @@
 +.springer.com
 +.springernature.com
 +.nextcloud.com
++.okko.tv
++.yappy.media
++.stepik.org
