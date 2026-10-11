@@ -81,7 +81,7 @@ dns:
       - https://8.8.8.8/dns-query#Обход блокировок
       - https://94.140.14.14/dns-query#Обход блокировок
     # DNS для заблокированных ресурсов идёт через то, что выбрано в «Обход блокировок».
-    rule-set:заблокированные-itdog,заблокированные-refilter,мои-в-обход,порно,нейросети,speedtest,spotify:
+    rule-set:заблокированные-itdog,заблокированные-refilter,мои-в-обход,порно,нейросети,speedtest,spotify,whatsapp,signal,viber:
       - https://1.1.1.1/dns-query#Обход блокировок # Cloudflare DNS
       - https://8.8.8.8/dns-query#Обход блокировок
     # DNS для Discord, DNS запросы будут идти через то, что выбрано в "Discord"
@@ -252,6 +252,38 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs
     path: ./rule-sets/spotify.mrs
+  whatsapp:
+    type: http
+    proxy: Обход блокировок
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/whatsapp.mrs
+    path: ./rule-sets/whatsapp.mrs
+  signal:
+    type: http
+    proxy: Обход блокировок
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/signal.mrs
+    path: ./rule-sets/signal.mrs
+  viber:
+    type: http
+    proxy: Обход блокировок
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/viber.mrs
+    path: ./rule-sets/viber.mrs
+  meta-адреса:
+    type: http
+    proxy: Обход блокировок
+    interval: 86400
+    behavior: ipcidr
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs
+    path: ./rule-sets/meta-адреса.mrs
   telegram-адреса:
     type: http
     proxy: Обход блокировок
@@ -449,6 +481,12 @@ rules:
   # Spotify
   - RULE-SET,spotify,Обход блокировок
   - PROCESS-NAME-REGEX,(?i).*spotify.*,Обход блокировок
+
+  # Мессенджеры: домены, а для WhatsApp ещё и адреса Meta, по которым идут звонки
+  - RULE-SET,whatsapp,Обход блокировок
+  - RULE-SET,signal,Обход блокировок
+  - RULE-SET,viber,Обход блокировок
+  - RULE-SET,meta-адреса,Обход блокировок,no-resolve
 
   # agy
   - PROCESS-NAME,agy.exe,Обход блокировок
