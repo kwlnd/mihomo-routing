@@ -129,7 +129,7 @@ proxy-groups:
       - Обход блокировок
 
   - name: Telegram
-    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/flat/telegram-logo.png
+    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/flat/telegram-plane.png
     type: select
     proxies:
       - Обход блокировок
