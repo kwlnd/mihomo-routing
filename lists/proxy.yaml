@@ -1,0 +1,48 @@
+# Домены, которые идут через «Обход блокировок»
+payload:
+  # Сервисы проверки IP, чтобы видеть IP выхода
+  - DOMAIN,flclashx.app
+  - DOMAIN,ipwho.is
+  - DOMAIN,api.myip.com
+  - DOMAIN,ipapi.co
+  - DOMAIN,ident.me
+  - DOMAIN,ip-api.com
+  - DOMAIN,ipinfo.io
+  - DOMAIN,api.ip.sb
+  - DOMAIN,2ip.io
+  - DOMAIN,2ipcore.com
+
+  # Google AI (agy, AI Studio, Gemini)
+  - DOMAIN-SUFFIX,daily-cloudcode-pa.googleapis.com
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+  - DOMAIN-SUFFIX,alkalimakersuite-pa.clients6.google.com
+  - DOMAIN-SUFFIX,aistudio.google.com
+  - DOMAIN-SUFFIX,gemini.google.com
+
+  # Заблокированные или закрытые для РФ
+  - DOMAIN-SUFFIX,ua
+  - DOMAIN-SUFFIX,habr.com
+  - DOMAIN-SUFFIX,seasonvar.ru
+  - DOMAIN-SUFFIX,lib.social
+  - DOMAIN-SUFFIX,kemono.su
+  - DOMAIN-SUFFIX,jut.su
+  - DOMAIN-SUFFIX,kara.su
+  - DOMAIN-SUFFIX,theins.ru
+  - DOMAIN-SUFFIX,tvrain.ru
+  - DOMAIN-SUFFIX,echo.msk.ru
+  - DOMAIN-SUFFIX,the-village.ru
+  - DOMAIN-SUFFIX,snob.ru
+  - DOMAIN-SUFFIX,novayagazeta.ru
+  - DOMAIN-SUFFIX,moscowtimes.ru
+  - DOMAIN-SUFFIX,natribu.org
+  - DOMAIN-SUFFIX,virustotal.com
+  - DOMAIN-KEYWORD,yummyanime
+  - DOMAIN-KEYWORD,yummy-anime
+  - DOMAIN-KEYWORD,animeportal
+  - DOMAIN-KEYWORD,anime-portal
+  - DOMAIN-KEYWORD,animedub
+  - DOMAIN-KEYWORD,anidub
+  - DOMAIN-KEYWORD,animelib
+  - DOMAIN-KEYWORD,ikianime
+  - DOMAIN-KEYWORD,anilibria
