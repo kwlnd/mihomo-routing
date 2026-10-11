@@ -38,3 +38,5 @@ api.ip.sb
 +.moscowtimes.ru
 +.natribu.org
 +.virustotal.com
++.sc-cdn.net
++.hpe.com
