@@ -1,0 +1,29 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "routing.yaml"
+      - "scripts/check-config.sh"
+      - ".github/workflows/check.yml"
+  pull_request:
+  workflow_dispatch:
+
+env:
+  MIHOMO_VERSION: v1.19.32
+
+jobs:
+  config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mihomo
+        run: |
+          curl -fsSL "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-linux-amd64-compatible-${MIHOMO_VERSION}.gz" | gunzip > mihomo
+          sudo install -m 755 mihomo /usr/local/bin/mihomo
+          rm mihomo
+
+      - name: Check routing.yaml
+        run: bash scripts/check-config.sh

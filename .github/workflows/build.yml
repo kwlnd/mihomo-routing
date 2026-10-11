@@ -70,6 +70,7 @@ jobs:
           if git diff --quiet routing.yaml; then
             echo "No changes"
           else
+            bash scripts/check-config.sh
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git commit -q -m "Update package list" routing.yaml
