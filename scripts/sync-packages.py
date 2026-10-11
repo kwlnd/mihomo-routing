@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Обновляет tun.exclude-package в конфиге по собранному списку российских приложений.
-# Использование: sync-packages.py ru-big.yaml out/rules/ru-apps.yaml
+# Использование: sync-packages.py routing.yaml out/rules/ru-apps.yaml
 import sys
 import textwrap
 

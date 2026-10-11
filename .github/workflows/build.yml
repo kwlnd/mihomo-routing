@@ -66,13 +66,13 @@ jobs:
 
       - name: Sync package list in config
         run: |
-          python3 scripts/sync-packages.py ru-big.yaml out/rules/ru-apps.yaml
-          if git diff --quiet ru-big.yaml; then
+          python3 scripts/sync-packages.py routing.yaml out/rules/ru-apps.yaml
+          if git diff --quiet routing.yaml; then
             echo "No changes"
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -q -m "Update package list" ru-big.yaml
+            git commit -q -m "Update package list" routing.yaml
             git pull --rebase
             git push
           fi
