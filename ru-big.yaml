@@ -110,33 +110,33 @@ proxies:
 
 proxy-groups:
   - name: Обход блокировок
-    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/pastel/bypass.png
+    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/flat/bypass.png
     type: select
     proxies:
       - Автовыбор
       - Без VPN # Опционально
 
   - name: YouTube
-    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/pastel/youtube.png
+    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/flat/youtube.png
     type: select
     proxies:
       - Обход блокировок
 
   - name: Discord
-    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/pastel/discord.png
+    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/flat/discord.png
     type: select
     proxies:
       - Обход блокировок
 
   - name: Telegram
-    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/pastel/telegram.png
+    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/flat/telegram.png?v=2
     type: select
     proxies:
       - Обход блокировок
       - Без VPN
 
   - name: По умолчанию
-    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/pastel/default.png
+    icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing@main/icons/flat/default.png
     type: select
     proxies:
       - Без VPN
