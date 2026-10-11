@@ -229,7 +229,7 @@ rule-providers:
     interval: 86400
     behavior: ipcidr
     format: mrs
-    url: https://raw.githubusercontent.com/legiz-ru/mihomo-rule-sets/main/other/discord-voice-ip-list.mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/main/lists/discord-voice-ips.mrs
     path: ./rule-sets/discord_voiceips.mrs
   refilter_domains:
     type: http
@@ -237,7 +237,7 @@ rule-providers:
     interval: 86400
     behavior: domain
     format: mrs
-    url: https://raw.githubusercontent.com/legiz-ru/mihomo-rule-sets/main/re-filter/domain-rule.mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/main/rules/refilter.mrs
     path: ./rule-sets/refilter.mrs
   youtube:
     type: http
@@ -267,25 +267,25 @@ rule-providers:
     type: http
     proxy: Обход блокировок
     interval: 86400
-    behavior: classical
-    format: yaml
-    url: https://raw.githubusercontent.com/Davoyan/mihomo-rule-sets/main/domains/additional-telegram-ips.yaml
-    path: ./rule-sets/additional-telegram-ips.yaml
+    behavior: ipcidr
+    format: mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/main/rules/telegram-extra-ips.mrs
+    path: ./rule-sets/additional-telegram-ips.mrs
   additional-telegram-domains:
     type: http
     proxy: Обход блокировок
     interval: 86400
-    behavior: classical
-    format: yaml
-    url: https://raw.githubusercontent.com/Davoyan/mihomo-rule-sets/main/domains/additional-telegram-domains.yaml
-    path: ./rule-sets/additional-telegram-domains.yaml
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/main/lists/telegram.mrs
+    path: ./rule-sets/additional-telegram-domains.mrs
   oisd_big:
     type: http
     proxy: Обход блокировок
     interval: 86400
     behavior: domain
     format: mrs
-    url: https://raw.githubusercontent.com/legiz-ru/mihomo-rule-sets/main/oisd/big.mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/main/rules/oisd-big.mrs
     path: ./rule-sets/oisd_big.mrs
   torrent-trackers:
     type: http
@@ -293,7 +293,7 @@ rule-providers:
     interval: 86400
     behavior: domain
     format: mrs
-    url: https://raw.githubusercontent.com/legiz-ru/mihomo-rule-sets/main/other/torrent-trackers.mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/main/rules/torrent-trackers.mrs
     path: ./rule-sets/torrent-trackers.mrs
   torrent-clients:
     type: http
@@ -301,7 +301,7 @@ rule-providers:
     interval: 86400
     behavior: classical
     format: yaml
-    url: https://raw.githubusercontent.com/legiz-ru/mihomo-rule-sets/main/other/torrent-clients.yaml
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/main/rules/torrent-clients.yaml
     path: ./rule-sets/torrent-clients.yaml
   ru-apps:
     type: http
@@ -309,16 +309,16 @@ rule-providers:
     interval: 86400
     behavior: classical
     format: yaml
-    url: https://raw.githubusercontent.com/legiz-ru/mihomo-rule-sets/main/other/ru-app-list.yaml
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/main/rules/ru-apps.yaml
     path: ./rule-sets/ru-apps.yaml
   ru-inside:
     type: http
     proxy: Обход блокировок
     interval: 86400
-    behavior: classical
-    format: text
-    url: https://raw.githubusercontent.com/itdoginfo/allow-domains/main/Russia/inside-clashx.lst
-    path: ./rule-sets/ru-inside.lst
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/main/rules/ru-inside.mrs
+    path: ./rule-sets/ru-inside.mrs
   cloudflare-ips:
     type: http
     proxy: Обход блокировок
@@ -398,14 +398,14 @@ rules:
   - PROCESS-NAME-REGEX,(?i).*(yandexmaps|yandexnavi|yandex.*map).*,DIRECT
 
   # Блокировка рекламы (опционально)
-  - RULE-SET,oisd_big,REJECT # Списки скомпилированные Legiz
+  - RULE-SET,oisd_big,REJECT # OISD big
 
   # Отправляем торренты в DIRECT (опционально)
   - RULE-SET,torrent-clients,DIRECT
   - RULE-SET,torrent-trackers,DIRECT
   - PROCESS-NAME-REGEX,(?i).*torrent.*,DIRECT
 
-  # Списки РУ приложений от Legiz
+  # Российские android-приложения
   - RULE-SET,ru-apps,Без VPN
 
   # Делаем REJECT QUIC
@@ -426,6 +426,7 @@ rules:
   - RULE-SET,telegram-ips,Telegram,no-resolve
   - RULE-SET,telegram-domains,Telegram
   - RULE-SET,additional-telegram-domains,Telegram
+  - DOMAIN-REGEX,.*nicegram.*,Telegram
   - RULE-SET,additional-telegram-ips,Telegram,no-resolve
   - PROCESS-NAME-REGEX,(?i).*ayugram.*,Telegram
   - PROCESS-NAME-REGEX,(?i).*telegram.*,Telegram

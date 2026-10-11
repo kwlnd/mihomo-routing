@@ -1,0 +1,57 @@
+name: build
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "lists/*.txt"
+      - "scripts/**"
+      - ".github/workflows/build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build
+  cancel-in-progress: false
+
+env:
+  MIHOMO_VERSION: v1.19.32
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mihomo
+        run: |
+          curl -fsSL "https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-linux-amd64-compatible-${MIHOMO_VERSION}.gz" | gunzip > mihomo
+          sudo install -m 755 mihomo /usr/local/bin/mihomo
+          rm mihomo
+
+      - name: Build lists
+        id: build
+        continue-on-error: true
+        run: bash scripts/build.sh
+
+      # Собранное коммитим даже при частичной ошибке: упавшие списки остаются прежними
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lists rules
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Update lists"
+            git pull --rebase
+            git push
+          fi
+
+      - name: Fail if a list was not built
+        if: steps.build.outcome == 'failure'
+        run: exit 1

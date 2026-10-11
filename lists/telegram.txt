@@ -1,0 +1,5 @@
+# Домены, которые идут через «Telegram» (сторонние клиенты и сервисы)
++.exteragram.app
++.swiftgram.app
++.stel.com
++.legra.ph
