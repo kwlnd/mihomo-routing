@@ -90,9 +90,9 @@ for src in "$ROOT"/lists/*.txt; do
   publish "$kind" "lists/$name.mrs" 1 own_list "$src"
 done
 
-publish domain    rules/refilter.mrs           10000 refilter
-publish domain    rules/oisd-big.mrs           50000 oisd_big
-publish domain    rules/ru-inside.mrs          300   ru_inside
+publish domain    rules/blocked-refilter.mrs   10000 refilter
+publish domain    rules/ads.mrs                50000 oisd_big
+publish domain    rules/blocked-itdog.mrs      300   ru_inside
 publish domain    rules/torrent-trackers.mrs   100   torrent_trackers
 publish classical rules/torrent-clients.yaml   10    torrent_clients
 publish classical rules/ru-apps.yaml           100   ru_apps

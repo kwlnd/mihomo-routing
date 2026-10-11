@@ -71,21 +71,21 @@ dns:
     - https://94.140.14.14/dns-query#По умолчанию
   nameserver-policy:
     # Приватные домены через системный ДНС
-    rule-set:geosite-private:
+    rule-set:локальные-домены:
       - system
     # Блокировка рекламы (опционально)
-    rule-set:oisd_big:
+    rule-set:реклама:
       - rcode://success
     # DNS для сайтов с файлами правил
     raw.githubusercontent.com,cdn.jsdelivr.net,github.com:
       - https://8.8.8.8/dns-query#Обход блокировок
       - https://94.140.14.14/dns-query#Обход блокировок
     # DNS для заблокированных ресурсов идёт через то, что выбрано в «Обход блокировок».
-    rule-set:ru-inside,refilter_domains,my-proxy,category-porn,ai,speedtest-net:
+    rule-set:заблокированные-itdog,заблокированные-refilter,мои-в-обход,порно,нейросети,speedtest:
       - https://1.1.1.1/dns-query#Обход блокировок # Cloudflare DNS
       - https://8.8.8.8/dns-query#Обход блокировок
     # DNS для Discord, DNS запросы будут идти через то, что выбрано в "Discord"
-    rule-set:discord_domains:
+    rule-set:discord-домены:
       - https://8.8.8.8/dns-query#Discord
       - https://94.140.14.14/dns-query#Discord
     # DNS для доменов Youtube, DNS запросы будут идти через то, что выбрано в "Youtube"
@@ -93,11 +93,11 @@ dns:
       - https://8.8.8.8/dns-query#YouTube
       - https://94.140.14.14/dns-query#YouTube
     # DNS для доменов Telegram, DNS запросы будут идти через то, что выбрано в "Telegram"
-    rule-set:telegram-domains,additional-telegram-domains:
+    rule-set:telegram-домены,telegram-домены-мои:
       - https://8.8.8.8/dns-query#Telegram
       - https://94.140.14.14/dns-query#Telegram
     # DNS для RU сайтов идёт напрямую, как и сами ресурсы.
-    rule-set:my-direct,geosite-ru:
+    rule-set:мои-напрямую,российские-домены:
       - https://77.88.8.8/dns-query#Без VPN
       - https://8.8.8.8/dns-query#Без VPN
 
@@ -164,7 +164,7 @@ proxy-groups:
     lazy: true
 
 rule-providers:
-  geosite-ru:
+  российские-домены:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -172,7 +172,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/Davoyan/mihomo-rule-sets/main/rules/category-ru.mrs
     path: ./rule-sets/geosite-ru.mrs
-  ai:
+  нейросети:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -180,7 +180,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs
     path: ./rule-sets/ai.mrs
-  category-porn:
+  порно:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -188,7 +188,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-porn.mrs
     path: ./rule-sets/category-porn.mrs
-  geoip-for-ru:
+  российские-адреса:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -196,7 +196,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/Davoyan/mihomo-rule-sets/main/ip-for-ru/lists/ips-for-ru.mrs
     path: ./rule-sets/geoip-for-ru.mrs
-  geosite-private:
+  локальные-домены:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -204,7 +204,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
     path: ./rule-sets/geosite-private.mrs
-  discord_domains:
+  discord-домены:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -212,7 +212,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/discord.mrs
     path: ./rule-sets/discord_domains.mrs
-  speedtest-net:
+  speedtest:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -220,7 +220,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/speedtest.mrs
     path: ./rule-sets/speedtest-net.mrs
-  discord_voiceips:
+  discord-голос-адреса:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -228,13 +228,13 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/lists/discord-voice-ips.mrs
     path: ./rule-sets/discord_voiceips.mrs
-  refilter_domains:
+  заблокированные-refilter:
     type: http
     proxy: Обход блокировок
     interval: 86400
     behavior: domain
     format: mrs
-    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/refilter.mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/blocked-refilter.mrs
     path: ./rule-sets/refilter.mrs
   youtube:
     type: http
@@ -244,7 +244,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
     path: ./rule-sets/youtube.mrs
-  telegram-ips:
+  telegram-адреса:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -252,7 +252,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
     path: ./rule-sets/telegram-ips.mrs
-  telegram-domains:
+  telegram-домены:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -260,7 +260,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
     path: ./rule-sets/telegram-domains.mrs
-  additional-telegram-ips:
+  telegram-адреса-доп:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -268,7 +268,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/telegram-extra-ips.mrs
     path: ./rule-sets/additional-telegram-ips.mrs
-  additional-telegram-domains:
+  telegram-домены-мои:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -276,15 +276,15 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/lists/telegram.mrs
     path: ./rule-sets/additional-telegram-domains.mrs
-  oisd_big:
+  реклама:
     type: http
     proxy: Обход блокировок
     interval: 86400
     behavior: domain
     format: mrs
-    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/oisd-big.mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/ads.mrs
     path: ./rule-sets/oisd_big.mrs
-  torrent-trackers:
+  торрент-трекеры:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -292,7 +292,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/torrent-trackers.mrs
     path: ./rule-sets/torrent-trackers.mrs
-  torrent-clients:
+  торрент-клиенты:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -300,7 +300,7 @@ rule-providers:
     format: yaml
     url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/torrent-clients.yaml
     path: ./rule-sets/torrent-clients.yaml
-  ru-apps:
+  российские-приложения:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -308,15 +308,15 @@ rule-providers:
     format: yaml
     url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/ru-apps.yaml
     path: ./rule-sets/ru-apps.yaml
-  ru-inside:
+  заблокированные-itdog:
     type: http
     proxy: Обход блокировок
     interval: 86400
     behavior: domain
     format: mrs
-    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/ru-inside.mrs
+    url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/rules/blocked-itdog.mrs
     path: ./rule-sets/ru-inside.mrs
-  cloudflare-ips:
+  cloudflare-адреса:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -324,12 +324,12 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cloudflare.mrs
     path: ./rule-sets/cloudflare-ips.mrs
-  inline-blocked-ips:
+  мои-адреса-в-обход:
     type: inline
     payload:
       - IP-CIDR,172.232.25.131/32 #IP для чата Warframe (Пример)
     behavior: classical
-  geoip-private:
+  локальные-адреса:
     type: inline
     behavior: classical
     payload:
@@ -351,7 +351,7 @@ rule-providers:
       - IP-CIDR,fc00::/7
       - IP-CIDR,fe80::/10
       - IP-CIDR,ff00::/8
-  my-proxy:
+  мои-в-обход:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -359,7 +359,7 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/kwlnd/mihomo-routing/release/lists/proxy.mrs
     path: ./rule-sets/my-proxy.mrs
-  my-direct:
+  мои-напрямую:
     type: http
     proxy: Обход блокировок
     interval: 86400
@@ -378,8 +378,8 @@ rules:
   - DST-PORT,53,DNS-OUT
 
   # Локальную сеть в директ
-  - RULE-SET,geoip-private,DIRECT,no-resolve
-  - RULE-SET,geosite-private,DIRECT
+  - RULE-SET,локальные-адреса,DIRECT,no-resolve
+  - RULE-SET,локальные-домены,DIRECT
 
   # ВПН и всякие Anydesk, Rustdesk, Teamviewer в директ (опционально)
   - PROCESS-NAME-REGEX,(?i).*tailscale.*,DIRECT
@@ -394,21 +394,21 @@ rules:
   - PROCESS-NAME-REGEX,(?i).*(yandexmaps|yandexnavi|yandex.*map).*,DIRECT
 
   # Блокировка рекламы (опционально)
-  - RULE-SET,oisd_big,REJECT # OISD big
+  - RULE-SET,реклама,REJECT # Список OISD big
 
   # Отправляем торренты в DIRECT (опционально)
-  - RULE-SET,torrent-clients,DIRECT
-  - RULE-SET,torrent-trackers,DIRECT
+  - RULE-SET,торрент-клиенты,DIRECT
+  - RULE-SET,торрент-трекеры,DIRECT
   - PROCESS-NAME-REGEX,(?i).*torrent.*,DIRECT
 
   # Российские android-приложения
-  - RULE-SET,ru-apps,Без VPN
+  - RULE-SET,российские-приложения,Без VPN
 
   # Делаем REJECT QUIC
   - RULE-SET,quic,REJECT
 
   # Свой список доменов в обход (lists/proxy.txt)
-  - RULE-SET,my-proxy,Обход блокировок
+  - RULE-SET,мои-в-обход,Обход блокировок
   # Аниме-сайты, которые постоянно меняют домены
   - DOMAIN-REGEX,.*(yummy-?anime|anime-?portal|animedub|anidub|animelib|ikianime|anilibria).*,Обход блокировок
 
@@ -419,11 +419,11 @@ rules:
   - PROCESS-NAME-REGEX,(?i).*youtube.*,YouTube
 
   # Telegram
-  - RULE-SET,telegram-ips,Telegram,no-resolve
-  - RULE-SET,telegram-domains,Telegram
-  - RULE-SET,additional-telegram-domains,Telegram
+  - RULE-SET,telegram-адреса,Telegram,no-resolve
+  - RULE-SET,telegram-домены,Telegram
+  - RULE-SET,telegram-домены-мои,Telegram
   - DOMAIN-REGEX,.*nicegram.*,Telegram
-  - RULE-SET,additional-telegram-ips,Telegram,no-resolve
+  - RULE-SET,telegram-адреса-доп,Telegram,no-resolve
   - PROCESS-NAME-REGEX,(?i).*ayugram.*,Telegram
   - PROCESS-NAME-REGEX,(?i).*telegram.*,Telegram
   - PROCESS-NAME-REGEX,(?i).*nekogram.*,Telegram
@@ -431,10 +431,10 @@ rules:
   - PROCESS-NAME-REGEX,(?i).*nekox.*,Telegram
 
   # Discord
-  - AND,((RULE-SET,cloudflare-ips),(NETWORK,udp),(DST-PORT,19200-19500)),Discord
-  - AND,((RULE-SET,cloudflare-ips),(NETWORK,udp),(DST-PORT,50000-50100)),Discord
-  - AND,((RULE-SET,discord_voiceips),(NETWORK,udp),(DST-PORT,50000-50100)),Discord
-  - RULE-SET,discord_domains,Discord
+  - AND,((RULE-SET,cloudflare-адреса),(NETWORK,udp),(DST-PORT,19200-19500)),Discord
+  - AND,((RULE-SET,cloudflare-адреса),(NETWORK,udp),(DST-PORT,50000-50100)),Discord
+  - AND,((RULE-SET,discord-голос-адреса),(NETWORK,udp),(DST-PORT,50000-50100)),Discord
+  - RULE-SET,discord-домены,Discord
   - PROCESS-NAME-REGEX,(?i).*discord.*,Discord
   - PROCESS-NAME-REGEX,(?i).*vesktop.*,Discord
 
@@ -445,25 +445,25 @@ rules:
   - PROCESS-NAME,agy.exe,Обход блокировок
 
   # Обход блокировок
-  - RULE-SET,ru-inside,Обход блокировок # ITDog: домены, недоступные из РФ
-  - RULE-SET,refilter_domains,Обход блокировок # Re:Filter: домены, недоступные из РФ
-  - RULE-SET,inline-blocked-ips,Обход блокировок,no-resolve # IP набитые вручную (смотрите выше)
-  - RULE-SET,category-porn,Обход блокировок # Опционально
-  - RULE-SET,ai,Обход блокировок # Нейросети
-  - RULE-SET,speedtest-net,Обход блокировок # speedtest.net
+  - RULE-SET,заблокированные-itdog,Обход блокировок # ITDog: домены, недоступные из РФ
+  - RULE-SET,заблокированные-refilter,Обход блокировок # Re:Filter: домены, недоступные из РФ
+  - RULE-SET,мои-адреса-в-обход,Обход блокировок,no-resolve # IP, вписанные вручную в rule-providers
+  - RULE-SET,порно,Обход блокировок # Опционально
+  - RULE-SET,нейросети,Обход блокировок
+  - RULE-SET,speedtest,Обход блокировок
 
   # Российские сайты
-  - RULE-SET,my-direct,Без VPN # Свой список доменов напрямую (lists/direct.txt)
+  - RULE-SET,мои-напрямую,Без VPN # Свой список доменов напрямую (lists/direct.txt)
   - DOMAIN-REGEX,.*(avito|miradres|shutterstock|2gis|diginetica|kinescopecdn|researchgate).*,Без VPN
   - DOMAIN-REGEX,.*(kaspersky|pikabu|wildberries|aliexpress).*,Без VPN
 
   # geosite-ru включает в себя и собирается автоматически тут (https://github.com/Davoyan/mihomo-rule-sets) -
   # Подробнее о том, из чего формируются списки, читайте в readme https://github.com/Davoyan/mihomo-rule-sets
-  - RULE-SET,geosite-ru,Без VPN
+  - RULE-SET,российские-домены,Без VPN
 
   # geo-ip-for-ru (https://github.com/Davoyan/mihomo-rule-sets/tree/main/ip-for-ru/lists)
   # Подробнее о том, из чего формируются списки, читайте в readme https://github.com/Davoyan/mihomo-rule-sets
-  - RULE-SET,geoip-for-ru,Без VPN
+  - RULE-SET,российские-адреса,Без VPN
 
   # По умолчанию
   - MATCH,По умолчанию
