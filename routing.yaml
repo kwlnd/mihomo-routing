@@ -283,7 +283,7 @@ rule-providers:
     behavior: ipcidr
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs
-    path: ./rule-sets/meta-адреса.mrs
+    path: ./rule-sets/meta-ips.mrs
   telegram-адреса:
     type: http
     proxy: Обход блокировок
