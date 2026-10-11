@@ -134,8 +134,8 @@ proxy-groups:
     icon: https://cdn.jsdelivr.net/gh/kwlnd/mihomo-routing-icons@main/vector-global.png
     type: select
     proxies:
-      - Обход блокировок
       - Без VPN
+      - Обход блокировок
 
   - name: PROXY
     remnawave: # Кастомное поле используемое только в Remnawave
