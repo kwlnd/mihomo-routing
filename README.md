@@ -14,6 +14,7 @@
 заблокированное — через прокси, остальное — напрямую
 
 [![build](https://github.com/kwlnd/mihomo-routing/actions/workflows/build.yml/badge.svg)](https://github.com/kwlnd/mihomo-routing/actions/workflows/build.yml)
+[![check](https://github.com/kwlnd/mihomo-routing/actions/workflows/check.yml/badge.svg)](https://github.com/kwlnd/mihomo-routing/actions/workflows/check.yml)
 ![списки обновлены](https://img.shields.io/github/last-commit/kwlnd/mihomo-routing/release?label=%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B8%20%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D1%8B&color=1FB89E)
 ![mihomo](https://img.shields.io/badge/mihomo-1.19.32-7C5CFF)
 
@@ -84,6 +85,8 @@ example.com      только точное совпадение
 | [`assets`](https://github.com/kwlnd/mihomo-routing/tree/assets) | иконки групп и фоны для FlClashX |
 
 GitHub Actions раз в сутки скачивает списки из первоисточников, пакует их ядром mihomo и кладёт в `release`. Если источник недоступен или отдал мусор, остаётся прошлая версия файла, а сборка помечается упавшей.
+
+При каждом изменении `routing.yaml` конфиг прогоняется через ядро mihomo. Если он не загружается — ошибка в синтаксисе, ссылка на несуществующую группу или список — проверка `check` падает и показывает виноватую строку.
 
 <details>
 <summary><b>Источники списков</b></summary>
