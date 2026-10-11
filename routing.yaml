@@ -81,7 +81,7 @@ dns:
       - https://8.8.8.8/dns-query#Обход блокировок
       - https://94.140.14.14/dns-query#Обход блокировок
     # DNS для заблокированных ресурсов идёт через то, что выбрано в «Обход блокировок».
-    rule-set:заблокированные-itdog,заблокированные-refilter,мои-в-обход,порно,нейросети,speedtest:
+    rule-set:заблокированные-itdog,заблокированные-refilter,мои-в-обход,порно,нейросети,speedtest,spotify:
       - https://1.1.1.1/dns-query#Обход блокировок # Cloudflare DNS
       - https://8.8.8.8/dns-query#Обход блокировок
     # DNS для Discord, DNS запросы будут идти через то, что выбрано в "Discord"
@@ -244,6 +244,14 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
     path: ./rule-sets/youtube.mrs
+  spotify:
+    type: http
+    proxy: Обход блокировок
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs
+    path: ./rule-sets/spotify.mrs
   telegram-адреса:
     type: http
     proxy: Обход блокировок
@@ -439,6 +447,7 @@ rules:
   - PROCESS-NAME-REGEX,(?i).*vesktop.*,Discord
 
   # Spotify
+  - RULE-SET,spotify,Обход блокировок
   - PROCESS-NAME-REGEX,(?i).*spotify.*,Обход блокировок
 
   # agy
