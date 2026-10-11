@@ -1,0 +1,40 @@
+# Домены, которые идут через «Обход блокировок»
+# "+.домен" — домен со всеми поддоменами, без префикса — точное совпадение
+
+# Сервисы проверки IP, чтобы видеть IP выхода
+flclashx.app
+ipwho.is
+api.myip.com
+ipapi.co
+ident.me
+ip-api.com
+ipinfo.io
+api.ip.sb
+2ip.io
+2ipcore.com
+
+# Google AI (agy, AI Studio, Gemini)
++.daily-cloudcode-pa.googleapis.com
++.generativelanguage.googleapis.com
++.proactivebackend-pa.googleapis.com
++.alkalimakersuite-pa.clients6.google.com
++.aistudio.google.com
++.gemini.google.com
+
+# Заблокированные или закрытые для РФ
++.ua
++.habr.com
++.seasonvar.ru
++.lib.social
++.kemono.su
++.jut.su
++.kara.su
++.theins.ru
++.tvrain.ru
++.echo.msk.ru
++.the-village.ru
++.snob.ru
++.novayagazeta.ru
++.moscowtimes.ru
++.natribu.org
++.virustotal.com

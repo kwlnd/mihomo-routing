@@ -1,0 +1,33 @@
+# Домены, которые идут напрямую («Без VPN»)
+# "+.домен" — домен со всеми поддоменами, без префикса — точное совпадение
+
++.ru
++.su
++.by
++.ru.com
++.ru.net
++.2ip.ru
++.yastatic.net
++.yandex.net
++.yandex.kz
++.yandex.com
++.yadi.sk
++.mycdn.me
++.jivosite.com
++.vk.com
++.avira.com
++.kudago.com
++.kinescope.io
++.redheadsound.studio
++.plplayer.online
++.lomont.site
++.remanga.org
++.shopstory.live
++.premier.one
++.ozon.com
++.ozonusercontent.com
++.likee.video
++.like.video
++.springer.com
++.springernature.com
++.nextcloud.com
