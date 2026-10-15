@@ -37,16 +37,12 @@ publish() {
 
 DOMAIN='^[A-Za-z0-9._-]+$'
 
-# Сервисы Google и YouTube из списков блокировок не берём: Google работает напрямую,
-# YouTube идёт своей группой, а нейросети Google — через список «нейросети» и lists/proxy.txt
-GOOGLE='(^|\.)(google|google\.com|googleapis\.com|gstatic\.com|googleusercontent\.com|googlevideo\.com|ggpht\.com|gvt[0-9]\.com|googletagmanager\.com|googlesyndication\.com|google-analytics\.com|doubleclick\.net|withgoogle\.com|youtube\.com|youtu\.be|ytimg\.com|youtube-nocookie\.com|youtubekids\.com)$'
-
 own_list() { tr -d '\r' < "$1" | sed 's/[[:space:]]*#.*$//' | grep -v '^[[:space:]]*$'; }
 
 # Re:filter — заблокированные в РФ домены
 refilter() {
   fetch https://raw.githubusercontent.com/1andrevich/Re-filter-lists/main/domains_all.lst |
-    grep -E "$DOMAIN" | grep -vE '^[0-9.]+$' | grep -vE "$GOOGLE" | sed 's/^/+./'
+    grep -E "$DOMAIN" | grep -vE '^[0-9.]+$' | sed 's/^/+./'
 }
 
 # OISD big — реклама и трекеры
@@ -58,7 +54,7 @@ oisd_big() {
 # ITDog — домены, недоступные из РФ
 ru_inside() {
   fetch https://raw.githubusercontent.com/itdoginfo/allow-domains/main/Russia/inside-clashx.lst |
-    sed -n 's/^DOMAIN-SUFFIX,\.\{0,1\}//p' | grep -vE "$GOOGLE" | sed 's/^/+./'
+    sed -n 's/^DOMAIN-SUFFIX,\.\{0,1\}/+./p'
 }
 
 # Торрент-трекеры
