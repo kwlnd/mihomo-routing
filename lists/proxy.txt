@@ -20,6 +20,7 @@ api.ip.sb
 +.alkalimakersuite-pa.clients6.google.com
 +.aistudio.google.com
 +.gemini.google.com
++.artificialanalysis.ai
 
 # Заблокированные или закрытые для РФ
 +.ua
