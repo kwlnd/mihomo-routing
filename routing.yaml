@@ -92,6 +92,10 @@ dns:
     rule-set:youtube:
       - https://8.8.8.8/dns-query#YouTube
       - https://94.140.14.14/dns-query#YouTube
+    # DNS для остальных сервисов Google — после YouTube, чтобы домены YouTube резолвились через свою группу
+    rule-set:google:
+      - https://1.1.1.1/dns-query#Обход блокировок
+      - https://8.8.8.8/dns-query#Обход блокировок
     # DNS для доменов Telegram, DNS запросы будут идти через то, что выбрано в "Telegram"
     rule-set:telegram-домены,telegram-домены-мои:
       - https://8.8.8.8/dns-query#Telegram
@@ -244,6 +248,14 @@ rule-providers:
     format: mrs
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
     path: ./rule-sets/youtube.mrs
+  google:
+    type: http
+    proxy: Обход блокировок
+    interval: 86400
+    behavior: domain
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+    path: ./rule-sets/google.mrs
   spotify:
     type: http
     proxy: Обход блокировок
@@ -456,6 +468,8 @@ rules:
 
   # YouTube
   - RULE-SET,youtube,YouTube
+  # Остальные сервисы Google, в том числе запросы приложения YouTube к аккаунтам и API
+  - RULE-SET,google,Обход блокировок
   - PROCESS-NAME-REGEX,(?i).*youtube.*,YouTube
 
   # Telegram
